@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Agenda — Lord Massi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #263447;
+      --border: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #E86749;
+      --accent-soft: rgba(232,103,73,0.15);
+      --green: #4ade80;
+      --green-soft: rgba(74,222,128,0.12);
+      --yellow: #fbbf24;
+      --yellow-soft: rgba(251,191,36,0.12);
+      --red: #f87171;
+      --red-soft: rgba(248,113,113,0.12);
+      --blue: #60a5fa;
+      --blue-soft: rgba(96,165,250,0.12);
+      --purple: #a78bfa;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 16px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .header .subtitle {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .update-badge {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    /* NAV TABS */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* MAIN CONTENT */
+    .main { padding: 16px; max-width: 600px; margin: 0 auto; }
+
+    /* SECTION */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* EVENT ITEMS */
+    .event-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .event-item:first-child { padding-top: 0; }
+    .event-date {
+      min-width: 52px;
+      text-align: center;
+    }
+    .event-date .day { font-size: 1.3rem; font-weight: 700; line-height: 1; color: var(--accent); }
+    .event-date .month { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; }
+    .event-body { flex: 1; }
+    .event-title { font-size: 0.85rem; font-weight: 500; line-height: 1.3; }
+    .event-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .event-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .tag-urgente { background: var(--red-soft); color: var(--red); }
+    .tag-salud { background: var(--blue-soft); color: var(--blue); }
+    .tag-deporte { background: var(--green-soft); color: var(--green); }
+    .tag-academia { background: var(--yellow-soft); color: var(--yellow); }
+    .tag-social { background: rgba(167,139,250,0.12); color: var(--purple); }
+    .tag-trabajo { background: var(--accent-soft); color: var(--accent); }
+
+    /* PROJECTS */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border-left: 3px solid transparent;
+    }
+    .project-card.alta { border-left-color: var(--red); }
+    .project-card.media { border-left-color: var(--yellow); }
+    .project-card.baja { border-left-color: var(--green); }
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .project-name { font-size: 0.9rem; font-weight: 600; }
+    .project-badge {
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .badge-alta { background: var(--red-soft); color: var(--red); }
+    .badge-media { background: var(--yellow-soft); color: var(--yellow); }
+    .badge-baja { background: var(--green-soft); color: var(--green); }
+    .project-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+    .project-next {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: var(--surface2);
+      border-radius: var(--radius-sm);
+      font-size: 0.73rem;
+      color: var(--text);
+    }
+    .project-next strong { color: var(--accent); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+
+    /* HEALTH TABLE */
+    .health-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .health-item:last-child { border-bottom: none; }
+    .health-item:first-child { padding-top: 0; }
+    .health-name { font-size: 0.85rem; font-weight: 500; }
+    .health-date { font-size: 0.75rem; color: var(--accent); font-weight: 500; margin-top: 2px; }
+    .health-notes { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .health-status {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .status-ok { background: var(--green-soft); color: var(--green); }
+    .status-pending { background: var(--yellow-soft); color: var(--yellow); }
+    .status-urgent { background: var(--red-soft); color: var(--red); }
+
+    /* WEEK SCHEDULE */
+    .week-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .week-item:last-child { border-bottom: none; }
+    .week-item:first-child { padding-top: 0; }
+    .week-day {
+      min-width: 70px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .week-body { flex: 1; }
+    .week-act { font-size: 0.82rem; font-weight: 500; }
+    .week-time { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* DECISIONS */
+    .decision-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .decision-item:last-child { border-bottom: none; }
+    .decision-item:first-child { padding-top: 0; }
+    .decision-title { font-size: 0.85rem; font-weight: 500; }
+    .decision-urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .decision-notes { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+    /* SECTION HEADER CARD */
+    .section-header {
+      background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-icon { font-size: 1.6rem; }
+    .section-title { font-size: 1rem; font-weight: 700; }
+    .section-subtitle { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+    /* HORIZON PILL */
+    .horizon-pill {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: var(--surface2);
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    /* FOOTER */
+    .footer-note {
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      padding: 8px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Lord Massi ⚡</h1>
+      <div class="subtitle">Sistema de planificación integrado</div>
+    </div>
+    <div class="update-badge" id="update-date">Cargando...</div>
+  </div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="tab active" onclick="showSection('eventos', this)">📅 Eventos</button>
+    <button class="tab" onclick="showSection('proyectos', this)">🚀 Proyectos</button>
+    <button class="tab" onclick="showSection('pendientes', this)">⚡ Pendientes</button>
+    <button class="tab" onclick="showSection('salud', this)">🏥 Salud</button>
+    <button class="tab" onclick="showSection('semana', this)">🗓 Semana</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== EVENTOS ===== -->
+  <div class="section active" id="section-eventos">
+    <div class="section-header">
+      <div class="section-icon">📅</div>
+      <div>
+        <div class="section-title">Próximos Eventos</div>
+        <div class="section-subtitle">Agenda integrada · todo el año 2026</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔴 Esta semana / urgente</div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">22</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">Retirar Kit Maratana</div>
+          <div class="event-meta">16:30 hs</div>
+          <span class="event-tag tag-deporte">Deporte</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">22</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">🎂 Cumpleaños Amadeo (5 años)</div>
+          <div class="event-meta">17:45–20:15 hs · Salón UP, Caseros 2367, San Martín</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">23</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">Reunión Hawa — Zoom</div>
+          <div class="event-meta">18:30–19:30 hs · zoom.us/j/75713319176</div>
+          <span class="event-tag tag-trabajo">Trabajo</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">25</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">Sesión web Ecología Activa — Fase 1</div>
+          <div class="event-meta">2–3 hs · terminar el sitio Wix</div>
+          <span class="event-tag tag-trabajo">Trabajo</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">26</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">🏃 Maratana 10K</div>
+          <div class="event-meta">08:00 hs · Carrera confirmada</div>
+          <span class="event-tag tag-deporte">Deporte</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">27</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">⚠️ Vence TP 1 Evaluativo Estadística</div>
+          <div class="event-meta">23:59 hs · Deadline académico</div>
+          <span class="event-tag tag-urgente">Urgente</span>
+          <span class="event-tag tag-academia">Academia</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">29</div><div class="month">ABR</div></div>
+        <div class="event-body">
+          <div class="event-title">Cine: El Diablo Viste a la Moda 2</div>
+          <div class="event-meta">22:30 hs · Hoyts Dot</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">📆 Mayo 2026</div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">01</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">💍 Casamiento Pau Otero</div>
+          <div class="event-meta">12:00–21:00 hs</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">~03</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Parcial de Climatología</div>
+          <div class="event-meta">A confirmar con docente</div>
+          <span class="event-tag tag-academia">Academia</span>
+          <span class="event-tag tag-urgente">Confirmar fecha</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">06</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Nutricionista</div>
+          <div class="event-meta">18:00 hs · Olleros 2411</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">08</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">🎂 Cumpleaños Novios</div>
+          <div class="event-meta">Anual</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">09</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">🎂 Cumpleaños Eloísa</div>
+          <div class="event-meta">Anual</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">11</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Reunión Tesis — con director José</div>
+          <div class="event-meta">17:00–18:00 hs · Llegar con datos listos</div>
+          <span class="event-tag tag-academia">Academia</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">18</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Oftalmología — estudio previo</div>
+          <div class="event-meta">16:30–17:30 hs</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">20</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Tomografía — Radiología</div>
+          <div class="event-meta">14:45 hs · Talcahuano 1134, Recoleta</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">21</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Carie 2/3 + Ver Tomografía</div>
+          <div class="event-meta">16:30–17:30 hs · Llevar tomo del día anterior</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">27</div><div class="month">MAY</div></div>
+        <div class="event-body">
+          <div class="event-title">Oftalmólogo — evaluación cirugía de ojos</div>
+          <div class="event-meta">11:00 hs · Agendado</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">📆 Junio – Diciembre 2026</div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">01</div><div class="month">JUN</div></div>
+        <div class="event-body">
+          <div class="event-title">🔧 Cambiar filtro PSA (agua cocina)</div>
+          <div class="event-meta">Recordatorio trimestral</div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">23</div><div class="month">JUN</div></div>
+        <div class="event-body">
+          <div class="event-title">🎂 Cumpleaños Euge</div>
+          <div class="event-meta">Anual</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">07</div><div class="month">JUL</div></div>
+        <div class="event-body">
+          <div class="event-title">🎮 GAIA — Registrar en DNDA</div>
+          <div class="event-meta">Vacaciones de invierno · Diseño y reglamento</div>
+          <span class="event-tag tag-trabajo">Proyecto</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">23</div><div class="month">JUL</div></div>
+        <div class="event-body">
+          <div class="event-title">✈️ Viaje San Martín de los Andes</div>
+          <div class="event-meta">Con pareja · duración a confirmar</div>
+          <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">31</div><div class="month">JUL</div></div>
+        <div class="event-body">
+          <div class="event-title">📝 Deadline Congreso SAPROCEA</div>
+          <div class="event-meta">Presentación de trabajo — proponer al director</div>
+          <span class="event-tag tag-academia">Academia</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">19</div><div class="month">AGO</div></div>
+        <div class="event-body">
+          <div class="event-title">Ergometría</div>
+          <div class="event-meta">18:00 hs · Hospital Italiano</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">01</div><div class="month">OCT</div></div>
+        <div class="event-body">
+          <div class="event-title">🎮 GAIA — Registrar en INPI</div>
+          <div class="event-meta">Nombre de marca</div>
+          <span class="event-tag tag-trabajo">Proyecto</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">19</div><div class="month">NOV</div></div>
+        <div class="event-body">
+          <div class="event-title">🌿 Congreso SAPROCEA</div>
+          <div class="event-meta">19–20 Nov · Hotel 13 de Julio</div>
+          <span class="event-tag tag-academia">Academia</span>
+          <span class="event-tag tag-trabajo">Trabajo</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">Q4</div><div class="month">2026</div></div>
+        <div class="event-body">
+          <div class="event-title">🎓 Entrega de tesis / Recibirse</div>
+          <div class="event-meta">2do cuatrimestre 2026 · Meta principal</div>
+          <span class="event-tag tag-academia">Academia</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-note">Agenda generada automáticamente · Cowork + Google Calendar</div>
+  </div>
+
+  <!-- ===== PROYECTOS ===== -->
+  <div class="section" id="section-proyectos">
+    <div class="section-header">
+      <div class="section-icon">🚀</div>
+      <div>
+        <div class="section-title">Proyectos</div>
+        <div class="section-subtitle">Corto · Mediano · Largo plazo</div>
+      </div>
+    </div>
+
+    <div class="project-card alta">
+      <div class="project-header">
+        <div class="project-name">🌿 Ecología Activa <span class="horizon-pill">Largo plazo</span></div>
+        <span class="project-badge badge-alta">ALTA</span>
+      </div>
+      <div class="project-desc">Marca consultora ambiental. Perfil científico, tecnológico y ético. Target: sector corporativo agro y urbano.<br>Web en Wix (sin publicar). 19 artículos de blog.</div>
+      <div class="project-next">
+        <strong>▶ Próximo paso</strong>
+        Sesión web 25/04 — terminar sitio Wix (Fase 1). Decidir sobre artículos 2021-2022.
+      </div>
+    </div>
+
+    <div class="project-card alta">
+      <div class="project-header">
+        <div class="project-name">🚁 Drones + CO2 <span class="horizon-pill">Mediano plazo</span></div>
+        <span class="project-badge badge-alta">ALTA</span>
+      </div>
+      <div class="project-desc">Sub-marca de Ecología Activa. Proyecto con socio. Sin nombre definido aún. Mayor potencial tecnológico y diferencial.</div>
+      <div class="project-next">
+        <strong>▶ Próximo paso</strong>
+        Reunirse con el socio — definir nombre, estructura y camino (sin fecha aún).
+      </div>
+    </div>
+
+    <div class="project-card alta">
+      <div class="project-header">
+        <div class="project-name">🎓 Universidad / Tesis <span class="horizon-pill">Corto plazo</span></div>
+        <span class="project-badge badge-alta">ALTA</span>
+      </div>
+      <div class="project-desc">UdeLaCiudad. Casi terminado. Tesis en curso con José (director). 2 materias 1er cuatri (Climatología + Estadística) + 2 en 2do cuatri.</div>
+      <div class="project-next">
+        <strong>▶ Próximos pasos</strong>
+        Confirmar fecha parcial Climatología (~3 mayo) · Reunión tesis 11/05 · Meta: recibirse en 2do cuatri 2026.
+      </div>
+    </div>
+
+    <div class="project-card media">
+      <div class="project-header">
+        <div class="project-name">🌊 Hawa <span class="horizon-pill">Corto plazo</span></div>
+        <span class="project-badge badge-media">MEDIA</span>
+      </div>
+      <div class="project-desc">Consultora ambiental externa. Promete mucho pero no concreta. Estrategia: monitoreo sin invertir demasiado tiempo.</div>
+      <div class="project-next">
+        <strong>▶ Próximo paso</strong>
+        Reunión Zoom 23/04 — revisar lineamientos y proyección a futuro.
+      </div>
+    </div>
+
+    <div class="project-card media">
+      <div class="project-header">
+        <div class="project-name">🗺️ Formación QGIS + CO2 + IA <span class="horizon-pill">Mediano plazo</span></div>
+        <span class="project-badge badge-media">MEDIA</span>
+      </div>
+      <div class="project-desc">Especialización virtual: QGIS + medición CO2 + IA. Opción evaluada: Weya Academy.</div>
+      <div class="project-next">
+        <strong>▶ Próximo paso</strong>
+        Comparar opciones disponibles. No urgente.
+      </div>
+    </div>
+
+    <div class="project-card baja">
+      <div class="project-header">
+        <div class="project-name">🎮 GAIA — Juego de mesa <span class="horizon-pill">Largo plazo</span></div>
+        <span class="project-badge badge-baja">DISFRUTE</span>
+      </div>
+      <div class="project-desc">Juego de mesa propio. Proyecto personal y creativo. Cierre: fin de 2026. Etapa actual: cerrar el reglamento.</div>
+      <div class="project-next">
+        <strong>▶ Hitos confirmados</strong>
+        07/07 — DNDA (diseño + reglamento) · 01/10 — INPI (nombre de marca) · Fin 2026 — contactar distribuidor.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== PENDIENTES ===== -->
+  <div class="section" id="section-pendientes">
+    <div class="section-header">
+      <div class="section-icon">⚡</div>
+      <div>
+        <div class="section-title">Decisiones Pendientes</div>
+        <div class="section-subtitle">Temas que requieren acción</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🚨 Urgente</div>
+
+      <div class="decision-item">
+        <div class="decision-title">🚨 Crear cuenta miBA nivel 3 — AGIP</div>
+        <span class="decision-urgency tag-urgente">Vence 30/04/2026</span>
+        <div class="decision-notes">CABA requiere cuenta miBA nivel 3 para el Portal del Contribuyente (AGIP).</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">📊 Confirmar fecha parcial Climatología</div>
+        <span class="decision-urgency tag-academia">Alta urgencia</span>
+        <div class="decision-notes">~semana del 3 de mayo 2026. Confirmar con docente.</div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Tareas de tesis — antes del 11/05</div>
+
+      <div class="decision-item">
+        <div class="decision-title">📍 Datos censo bovino por partido (Buenos Aires)</div>
+        <span class="decision-urgency" style="background:var(--red-soft);color:var(--red)">Vence 29/04</span>
+        <div class="decision-notes">Fuente: SENASA / INDEC (Censo Agropecuario)</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">🌡️ Estaciones SMN cercanas a zona pampeana</div>
+        <span class="decision-urgency" style="background:var(--red-soft);color:var(--red)">Vence 04/05</span>
+        <div class="decision-notes">smn.gob.ar — identificar y verificar datos disponibles</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">📊 Borrador tabla Excel: partidos vs. datos</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Vence 07/05</span>
+        <div class="decision-notes">Filas = partidos bonaerenses · Columnas = stock bovino + temperatura</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">❓ Preparar pregunta para José: Tier IPCC para metano entérico</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Vence 08/05</span>
+        <div class="decision-notes">Consultar guías IPCC antes de la reunión</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">✅ Revisión final — llegar el 11/05 con todo listo</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Vence 10/05</span>
+        <div class="decision-notes">Consolidar datos, tabla y pregunta para la reunión con José</div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Otras pendientes</div>
+
+      <div class="decision-item">
+        <div class="decision-title">🦠 Gestionar turno colonoscopía</div>
+        <span class="decision-urgency tag-salud">Media-Alta urgencia</span>
+        <div class="decision-notes">Receta en Hospital Italiano. Válida 6 meses. No demorar.</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">🦷 Gestionar turno implante de muela</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Media urgencia</span>
+        <div class="decision-notes">Esperar tomografía (20/05) para que el dentista planifique el implante.</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">🚁 Reunirse con socio — proyecto Drones/CO2</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Media urgencia</span>
+        <div class="decision-notes">Definir nombre, estructura y próximos pasos de la sub-marca.</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">🗺️ Evaluar formación QGIS + CO2 + IA</div>
+        <span class="decision-urgency" style="background:var(--green-soft);color:var(--green)">Baja urgencia</span>
+        <div class="decision-notes">Comparar Weya Academy vs. otras opciones virtuales.</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">🎮 Cerrar reglamento GAIA</div>
+        <span class="decision-urgency" style="background:var(--green-soft);color:var(--green)">Baja urgencia</span>
+        <div class="decision-notes">Debe estar listo antes del hito DNDA (07/07/2026).</div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-title">📝 Congreso SAPROCEA — proponer trabajo</div>
+        <span class="decision-urgency" style="background:var(--yellow-soft);color:var(--yellow)">Deadline 31/07</span>
+        <div class="decision-notes">Proponer al director de tesis. Congreso 19–20 Nov, Hotel 13 de Julio.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SALUD ===== -->
+  <div class="section" id="section-salud">
+    <div class="section-header">
+      <div class="section-icon">🏥</div>
+      <div>
+        <div class="section-title">Salud y Deporte</div>
+        <div class="section-subtitle">Turnos · estudios · carreras</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🏃 Deporte — Carreras 2026</div>
+
+      <div class="health-item">
+        <div class="health-name">🏃 Maratana 10K</div>
+        <div class="health-date">26/04/2026 · 08:00 hs</div>
+        <div class="health-notes">Carrera confirmada con plan.</div>
+        <span class="health-status status-ok">✓ Confirmada</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">🏃 Distancias más largas</div>
+        <div class="health-date">A definir</div>
+        <div class="health-notes">Solo cuando haya plan definido. El resto del calendario Carreras es referencia.</div>
+        <span class="health-status status-pending">Pendiente</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🩺 Turnos médicos</div>
+
+      <div class="health-item">
+        <div class="health-name">Nutricionista (recurrente)</div>
+        <div class="health-date">06/05/2026 · 18:00 hs</div>
+        <div class="health-notes">Mensual · Olleros 2411</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Oftalmología — estudio previo</div>
+        <div class="health-date">18/05/2026 · 16:30 hs</div>
+        <div class="health-notes">Estudio previo a la evaluación del 27/05</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Tomografía — Radiología</div>
+        <div class="health-date">20/05/2026 · 14:45 hs</div>
+        <div class="health-notes">Talcahuano 1134, Recoleta · Llevar resultado al dentista el 21/05</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Carie 2/3 + Ver Tomografía</div>
+        <div class="health-date">21/05/2026 · 16:30 hs</div>
+        <div class="health-notes">Llevar tomografía del día anterior. El dentista planifica implante.</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Oftalmólogo — evaluación cirugía de ojos</div>
+        <div class="health-date">27/05/2026 · 11:00 hs</div>
+        <div class="health-notes">Evaluar si es candidato para corrección visual</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Ergometría</div>
+        <div class="health-date">19/08/2026 · 18:00 hs</div>
+        <div class="health-notes">Control cardíaco. Antes de aumentar carga de entrenamiento.</div>
+        <span class="health-status status-ok">✓ Agendado</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Colonoscopía</div>
+        <div class="health-date">A gestionar</div>
+        <div class="health-notes">Receta en Hospital Italiano. Válida 6 meses. ¡No demorar!</div>
+        <span class="health-status status-urgent">⚠ Sin turno</span>
+      </div>
+
+      <div class="health-item">
+        <div class="health-name">Implante de muela</div>
+        <div class="health-date">A gestionar — esperar tomografía</div>
+        <div class="health-notes">El dentista define el plan después de ver la tomo del 20/05</div>
+        <span class="health-status status-pending">Pendiente tomo</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SEMANA ===== -->
+  <div class="section" id="section-semana">
+    <div class="section-header">
+      <div class="section-icon">🗓</div>
+      <div>
+        <div class="section-title">Estructura Semanal</div>
+        <div class="section-subtitle">Compromisos fijos recurrentes</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Rutina semanal</div>
+
+      <div class="week-item">
+        <div class="week-day">Lun–Vie</div>
+        <div class="week-body">
+          <div class="week-act">🎓 Universidad de la Ciudad</div>
+          <div class="week-time">8:00–15:00 hs · maximiliano.marcellini@udelaciudad.edu.ar</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Viernes</div>
+        <div class="week-body">
+          <div class="week-act">💬 Taller de conversación BÁSICO</div>
+          <div class="week-time">14:00–15:00 hs · UdeLaCiudad</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Lunes</div>
+        <div class="week-body">
+          <div class="week-act">🙏 Comunidad (grupo espiritual)</div>
+          <div class="week-time">19:30–22:00 hs · Compromiso fijo</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Mar y Mié</div>
+        <div class="week-body">
+          <div class="week-act">💪 Funcional — entrenamiento</div>
+          <div class="week-time">19:00–20:00 hs · Calendario Running</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Sábado</div>
+        <div class="week-body">
+          <div class="week-act">🏃 Running — técnica</div>
+          <div class="week-time">9:00–10:30 hs · Calendario Running</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Domingo</div>
+        <div class="week-body">
+          <div class="week-act">🏃 Running</div>
+          <div class="week-time">9:00–11:00 hs</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">⏰ Salida diaria</div>
+      <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.7">
+        Sale de casa a las <strong style="color:var(--accent)">7:10 AM</strong> de lunes a viernes.<br>
+        Destino: LAI, Tortuguitas.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // Set update date
+  const updateDate = "22 de abril de 2026";
+  document.getElementById('update-date').textContent = updateDate;
+
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
