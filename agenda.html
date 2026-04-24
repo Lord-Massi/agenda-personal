@@ -285,6 +285,24 @@
       margin-left: 6px;
     }
 
+    /* FORMACIÓN */
+    .course-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .course-item:last-child { border-bottom: none; }
+    .course-item:first-child { padding-top: 0; }
+    .course-name { font-size: 0.85rem; font-weight: 500; line-height: 1.35; }
+    .course-inst { font-size: 0.72rem; color: var(--accent); font-weight: 500; margin-top: 2px; }
+    .course-meta { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+    .course-link {
+      display: inline-block;
+      font-size: 0.65rem;
+      color: var(--blue);
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
     /* FOOTER */
     .footer-note {
       text-align: center;
@@ -304,7 +322,7 @@
       <h1>Lord Massi ⚡</h1>
       <div class="subtitle">Sistema de planificación integrado</div>
     </div>
-    <div class="update-badge" id="update-date">Cargando...</div>
+    <div class="update-badge" id="update-date">24 ABR 2026</div>
   </div>
   <div class="nav-tabs" id="navTabs">
     <button class="tab active" onclick="showSection('eventos', this)">📅 Eventos</button>
@@ -312,6 +330,7 @@
     <button class="tab" onclick="showSection('pendientes', this)">⚡ Pendientes</button>
     <button class="tab" onclick="showSection('salud', this)">🏥 Salud</button>
     <button class="tab" onclick="showSection('semana', this)">🗓 Semana</button>
+    <button class="tab" onclick="showSection('formacion', this)">📚 Formación</button>
   </div>
 </div>
 
@@ -329,26 +348,6 @@
 
     <div class="card">
       <div class="card-title">🔴 Esta semana / urgente</div>
-
-      <div class="event-item">
-        <div class="event-date"><div class="day">23</div><div class="month">ABR</div></div>
-        <div class="event-body">
-          <div class="event-title">Retirar Kit Maratana</div>
-          <div class="event-meta">15:00–16:00 hs · Monroe 916</div>
-          <span class="event-tag tag-deporte">Deporte</span>
-        </div>
-      </div>
-
-
-
-      <div class="event-item">
-        <div class="event-date"><div class="day">23</div><div class="month">ABR</div></div>
-        <div class="event-body">
-          <div class="event-title">Reunión Hawa — Zoom</div>
-          <div class="event-meta">18:30–19:30 hs · zoom.us/j/75713319176</div>
-          <span class="event-tag tag-trabajo">Trabajo</span>
-        </div>
-      </div>
 
       <div class="event-item">
         <div class="event-date"><div class="day">25</div><div class="month">ABR</div></div>
@@ -497,11 +496,29 @@
       </div>
 
       <div class="event-item">
+        <div class="event-date"><div class="day">03</div><div class="month">JUN</div></div>
+        <div class="event-body">
+          <div class="event-title">Nutricionista</div>
+          <div class="event-meta">18:00 hs · Olleros 2411</div>
+          <span class="event-tag tag-salud">Salud</span>
+        </div>
+      </div>
+
+      <div class="event-item">
         <div class="event-date"><div class="day">23</div><div class="month">JUN</div></div>
         <div class="event-body">
           <div class="event-title">🎂 Cumpleaños Euge</div>
           <div class="event-meta">Anual</div>
           <span class="event-tag tag-social">Social</span>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date"><div class="day">01</div><div class="month">JUL</div></div>
+        <div class="event-body">
+          <div class="event-title">Nutricionista</div>
+          <div class="event-meta">18:00 hs · Olleros 2411</div>
+          <span class="event-tag tag-salud">Salud</span>
         </div>
       </div>
 
@@ -626,20 +643,8 @@
       </div>
       <div class="project-desc">Consultora ambiental externa. Promete mucho pero no concreta. Estrategia: monitoreo sin invertir demasiado tiempo.</div>
       <div class="project-next">
-        <strong>▶ Próximo paso</strong>
-        Reunión Zoom 23/04 — revisar lineamientos y proyección a futuro.
-      </div>
-    </div>
-
-    <div class="project-card media">
-      <div class="project-header">
-        <div class="project-name">🗺️ Formación QGIS + CO2 + IA <span class="horizon-pill">Mediano plazo</span></div>
-        <span class="project-badge badge-media">MEDIA</span>
-      </div>
-      <div class="project-desc">Especialización virtual: QGIS + medición CO2 + IA. Opción evaluada: Weya Academy.</div>
-      <div class="project-next">
-        <strong>▶ Próximo paso</strong>
-        Comparar opciones disponibles. No urgente.
+        <strong>▶ Estado</strong>
+        Reunión Zoom realizada el 23/04. Próxima reunión: a confirmar.
       </div>
     </div>
 
@@ -747,6 +752,12 @@
       </div>
 
       <div class="decision-item">
+        <div class="decision-title">🖼️ Enmarcar el título universitario</div>
+        <span class="decision-urgency" style="background:var(--green-soft);color:var(--green)">Baja urgencia</span>
+        <div class="decision-notes">Medida del título: 45 cm × 32 cm. Conseguir marco apropiado.</div>
+      </div>
+
+      <div class="decision-item">
         <div class="decision-title">🎮 Cerrar reglamento GAIA</div>
         <span class="decision-urgency" style="background:var(--green-soft);color:var(--green)">Baja urgencia</span>
         <div class="decision-notes">Debe estar listo antes del hito DNDA (07/07/2026).</div>
@@ -851,6 +862,115 @@
     </div>
   </div>
 
+  <!-- ===== FORMACIÓN ===== -->
+  <div class="section" id="section-formacion">
+    <div class="section-header">
+      <div class="section-icon">📚</div>
+      <div>
+        <div class="section-title">Estudios y Formación</div>
+        <div class="section-subtitle">QGIS · IA · Drones · CO₂ · Interdisciplinario</div>
+      </div>
+    </div>
+
+    <!-- 5.1 QGIS -->
+    <div class="card">
+      <div class="card-title">📍 5.1 QGIS</div>
+      <div class="course-item">
+        <div class="course-name">Certificado QGIS + Teledetección + SIG avanzado</div>
+        <div class="course-inst">Weya Academy · Online</div>
+        <div class="course-meta">Formación técnica en sistemas de información geográfica aplicados.</div>
+        <a class="course-link" href="https://weyaacademy.com" target="_blank">weyaacademy.com</a>
+        <br><span class="health-status status-pending">⏳ Pendiente de evaluar</span>
+      </div>
+    </div>
+
+    <!-- 5.2 Inteligencia Artificial -->
+    <div class="card">
+      <div class="card-title">🤖 5.2 Inteligencia Artificial</div>
+      <div class="course-item">
+        <div class="course-name">Introduction to Claude Cowork</div>
+        <div class="course-inst">Anthropic · Online</div>
+        <div class="course-meta">Introducción al uso de IA y automatización con Claude para flujos de trabajo.</div>
+        <a class="course-link" href="https://anthropic.skilljar.com/introduction-to-claude-cowork/444166" target="_blank">anthropic.skilljar.com/introduction-to-claude-cowork/444166</a>
+        <br><span class="health-status status-pending">⏳ Pendiente</span>
+      </div>
+      <div class="course-item">
+        <div class="course-name">IA aplicada al análisis ambiental</div>
+        <div class="course-inst">Por definir</div>
+        <div class="course-meta">Integración de herramientas de IA para gestión y análisis de datos ambientales.</div>
+        <span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+    </div>
+
+    <!-- 5.3 Drones -->
+    <div class="card">
+      <div class="card-title">🚁 5.3 Drones</div>
+      <div class="course-item">
+        <div class="course-name">Piloto de drones UAS — habilitación ANAC</div>
+        <div class="course-inst">ANAC / Centro habilitado</div>
+        <div class="course-meta">Habilitación oficial para operar aeronaves no tripuladas en Argentina.</div>
+        <a class="course-link" href="https://www.anac.gob.ar" target="_blank">anac.gob.ar</a>
+        <br><span class="health-status status-pending">⏳ Pendiente</span>
+      </div>
+    </div>
+
+    <!-- 5.4 Huella de CO2 -->
+    <div class="card">
+      <div class="card-title">🌡️ 5.4 Huella de CO₂</div>
+
+      <div class="course-item">
+        <div class="course-name">Huella de Carbono y Gestión del Cambio Climático</div>
+        <div class="course-inst">Weya Academy · Online</div>
+        <div class="course-meta">Metodología de medición y gestión de huella de carbono.</div>
+        <a class="course-link" href="https://weyaacademy.com" target="_blank">weyaacademy.com</a>
+        <br><span class="health-status status-pending">⏳ Pendiente de evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Diplomatura en Gestión Integral de Huella de Carbono</div>
+        <div class="course-inst">FCEFyN – Universidad Nacional de Córdoba (UNC)</div>
+        <div class="course-meta">
+          123 hs · Modalidad combinada (híbrida) · Martes 18:30–21:30 hs<br>
+          Inicio: 10/03/2026 · Fin: 13/10/2026 · Arancel: $1.100.000<br>
+          Contenidos: metodologías ISO/GHG Protocol, mercados de carbono, descarbonización, auditoría y comunicación climática.
+        </div>
+        <a class="course-link" href="https://fcefyn.unc.edu.ar/facultad/secretarias/extension/area-de-formacion-continua/diplomatura-universitaria-de-formacion-continua-en-gestion-integral-de-huella-de-carbono/" target="_blank">fcefyn.unc.edu.ar → Diplomatura Huella de Carbono</a>
+        <br><span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Curso Cálculo de Huella de Carbono</div>
+        <div class="course-inst">ISM – Instituto Superior del Medio Ambiente · Online</div>
+        <div class="course-meta">
+          150 hs · 100% online · Incluye licencia de formación del software Simapro<br>
+          Contenidos: cálculo de huella para productos, organizaciones y eventos; análisis de ciclo de vida.
+        </div>
+        <a class="course-link" href="https://www.ismedioambiente.com/programas-formativos/calculo-de-huella-de-carbono/" target="_blank">ismedioambiente.com → Cálculo de Huella de Carbono</a>
+        <br><span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Medición de GEI con sensores integrados</div>
+        <div class="course-inst">Por definir</div>
+        <div class="course-meta">Tecnología de sensores para medición de gases de efecto invernadero en campo.</div>
+        <span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+    </div>
+
+    <!-- 5.5 Interdisciplinario -->
+    <div class="card">
+      <div class="card-title">🔗 5.5 Interdisciplinario</div>
+      <div class="course-item">
+        <div class="course-name">Cursos que combinen QGIS + IA + CO₂</div>
+        <div class="course-inst">Por identificar</div>
+        <div class="course-meta">Formaciones que integren más de una de las áreas de especialización.</div>
+        <span class="health-status status-pending">🔍 Por identificar</span>
+      </div>
+    </div>
+
+    <div class="footer-note">Sección actualizada el 24 de abril de 2026</div>
+  </div>
+
   <!-- ===== SEMANA ===== -->
   <div class="section" id="section-semana">
     <div class="section-header">
@@ -928,7 +1048,152 @@
 
 <script>
   // Set update date
-  const updateDate = "23 de abril de 2026";
+  const updateDate = "24 de abril de 2026";
+  document.getElementById('update-date').textContent = updateDate;
+
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
+
+      <div class="course-item">
+        <div class="course-name">Huella de Carbono y Gestión del Cambio Climático</div>
+        <div class="course-inst">Weya Academy · Online</div>
+        <div class="course-meta">Metodología de medición y gestión de huella de carbono.</div>
+        <a class="course-link" href="https://weyaacademy.com" target="_blank">weyaacademy.com</a>
+        <br><span class="health-status status-pending">⏳ Pendiente de evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Diplomatura en Gestión Integral de Huella de Carbono</div>
+        <div class="course-inst">FCEFyN – Universidad Nacional de Córdoba (UNC)</div>
+        <div class="course-meta">
+          123 hs · Modalidad combinada (híbrida) · Martes 18:30–21:30 hs<br>
+          Inicio: 10/03/2026 · Fin: 13/10/2026 · Arancel: $1.100.000<br>
+          Contenidos: ISO/GHG Protocol, mercados de carbono, descarbonización, auditoría y comunicación climática.
+        </div>
+        <a class="course-link" href="https://fcefyn.unc.edu.ar/facultad/secretarias/extension/area-de-formacion-continua/diplomatura-universitaria-de-formacion-continua-en-gestion-integral-de-huella-de-carbono/" target="_blank">fcefyn.unc.edu.ar → Diplomatura Huella de Carbono</a>
+        <br><span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Curso Cálculo de Huella de Carbono</div>
+        <div class="course-inst">ISM – Instituto Superior del Medio Ambiente · Online</div>
+        <div class="course-meta">
+          150 hs · 100% online · Incluye licencia de formación del software Simapro<br>
+          Contenidos: cálculo de huella para productos, organizaciones y eventos; análisis de ciclo de vida.
+        </div>
+        <a class="course-link" href="https://www.ismedioambiente.com/programas-formativos/calculo-de-huella-de-carbono/" target="_blank">ismedioambiente.com → Cálculo de Huella de Carbono</a>
+        <br><span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+
+      <div class="course-item">
+        <div class="course-name">Medición de GEI con sensores integrados</div>
+        <div class="course-inst">Por definir</div>
+        <div class="course-meta">Tecnología de sensores para medición de gases de efecto invernadero en campo.</div>
+        <span class="health-status status-pending">🔍 Por evaluar</span>
+      </div>
+
+    </div>
+
+    <!-- 5.5 Interdisciplinario -->
+    <div class="card">
+      <div class="card-title">🔗 5.5 Interdisciplinario</div>
+      <div class="course-item">
+        <div class="course-name">Cursos que combinen QGIS + IA + CO₂</div>
+        <div class="course-inst">Por identificar</div>
+        <div class="course-meta">Formaciones que integren más de una de las áreas de especialización.</div>
+        <span class="health-status status-pending">🔍 Por identificar</span>
+      </div>
+    </div>
+
+    <div class="footer-note">Sección actualizada el 24 de abril de 2026</div>
+  </div>
+
+  <!-- ===== SEMANA ===== -->
+  <div class="section" id="section-semana">
+    <div class="section-header">
+      <div class="section-icon">🗓</div>
+      <div>
+        <div class="section-title">Estructura Semanal</div>
+        <div class="section-subtitle">Compromisos fijos recurrentes</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Rutina semanal</div>
+
+      <div class="week-item">
+        <div class="week-day">Lun–Vie</div>
+        <div class="week-body">
+          <div class="week-act">🎓 Universidad de la Ciudad</div>
+          <div class="week-time">8:00–15:00 hs · maximiliano.marcellini@udelaciudad.edu.ar</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Viernes</div>
+        <div class="week-body">
+          <div class="week-act">💬 Taller de conversación BÁSICO</div>
+          <div class="week-time">14:00–15:00 hs · UdeLaCiudad</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Lunes</div>
+        <div class="week-body">
+          <div class="week-act">🙏 Comunidad (grupo espiritual)</div>
+          <div class="week-time">19:30–22:00 hs · Compromiso fijo</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Mar y Mié</div>
+        <div class="week-body">
+          <div class="week-act">💪 Funcional — entrenamiento</div>
+          <div class="week-time">19:00–20:00 hs · Calendario Running</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Sábado</div>
+        <div class="week-body">
+          <div class="week-act">🏃 Running — técnica</div>
+          <div class="week-time">9:00–10:30 hs · Calendario Running</div>
+        </div>
+      </div>
+
+      <div class="week-item">
+        <div class="week-day">Domingo</div>
+        <div class="week-body">
+          <div class="week-act">🏃 Running</div>
+          <div class="week-time">9:00–11:00 hs</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-title">⏰ Salida diaria</div>
+      <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.7">
+        Sale de casa a las <strong style="color:var(--accent)">7:10 AM</strong> de lunes a viernes.<br>
+        Destino: LAI, Tortuguitas.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  const updateDate = "24 de abril de 2026";
   document.getElementById('update-date').textContent = updateDate;
 
   function showSection(id, btn) {
