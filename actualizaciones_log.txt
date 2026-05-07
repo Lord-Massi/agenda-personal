@@ -1,0 +1,77 @@
+
+════════════════════════════════════════
+[28/04/2026 16:00] — Protocolo Actual ejecutado
+Acciones aprobadas: 2 de 8 totales
+Cambios realizados:
+  • [3] Médica Clínica 15/04/2026 registrada en sección 7.2 Seguimiento médico (.docx + HTML)
+  • [8] Seguimiento email Dr. Balasus — fecha límite 01/05/2026 asignada (.docx + HTML)
+Impacto: .docx actualizado ✅ | agenda.html actualizado ✅ | GitHub Pages push ✅
+════════════════════════════════════════
+
+════════════════════════════════════════
+[28/04/2026 20:10] — Protocolo Actual ejecutado (2da del día)
+Acciones aprobadas: 1 de 1 + limpieza automática
+Limpieza automática (3 ítems eliminados):
+  ✂ 26/04 — ✅ Maratana 10K — completada
+  ✂ 27/04 — ✅ TP 1 Evaluativo Estadística — Entregado
+  ✂ 30/04 — ✅ Cuenta miBA Nivel 3 — ya operativo
+Cambios aprobados:
+  • [1] Nota Climatología: clase 28/04 suspendida, material pendiente, parcial sin fecha
+Impacto: .docx ✅ | agenda.html ✅ | GitHub Pages ✅
+════════════════════════════════════════
+
+════════════════════════════════════════
+📅 PROTOCOLO ACTUAL — 02/05/2026 — 15:27
+════════════════════════════════════════
+Fuentes escaneadas: Gmail + Google Calendar (ventana 17/04–17/05/2026)
+Hallazgos detectados:
+  • [1] Salida MB Running el 17/05 — sin registrar en agenda
+  • [2] Dr. Balasus sin respuesta — límite 01/05 vencido (URGENTE)
+  • [3] Reunión Tesis con José (11/05) — ya registrada, sin novedad
+  • [4] Log de sesión del 02/05 — faltaba entrada
+Cambios aprobados (1, 2, 4):
+  • [1] 🏃 Salida MB Running — agregada el 17/05/2026 en Próximos Eventos
+  • [2] ⚠️ Seguimiento urgente Dr. Balasus — registrado en Pendientes (límite vencido)
+  • [4] Entrada de log del 02/05/2026 — agregada en Registro de Sesiones
+Impacto: .docx ✅ | agenda.html ✅ | GitHub Pages ✅
+════════════════════════════════════════
+
+════════════════════════════════════════
+[02/05/2026 — Protocolo Actual] — Segunda ejecución (continuación)
+Acciones aprobadas: LIMPIEZA AUTOMÁTICA + [1] Balasus urgencia + [2] Hawa eliminada
+Cambios realizados:
+  • LIMPIEZA — Eliminados 4 eventos pasados (28/04 SAProCEA, 28/04 GAIA, 29/04 Cine, 01/05 Casamiento)
+  • LIMPIEZA — Eliminada sección 6.5 Hawa del docx (usuario indicó: no traer más a la agenda sin pedido concreto de Gustavo)
+  • LIMPIEZA — Eliminada fila Hawa de tabla sec 1 y tabla sec 6
+  • LIMPIEZA — Eliminada Médica Clínica 15/04 (realizada) de sección 7.2
+  • ACTUALIZACIÓN — Balasus: urgencia reforzada (límite vencido, sin respuesta)
+  • ACTUALIZACIÓN — "Última actualización" → 02 de mayo de 2026
+  • agenda.html regenerado: mismos cambios aplicados
+  • GitHub Pages: push pendiente (ejecutar push_protocolo.ps1)
+════════════════════════════════════════
+
+[2026-05-05 17:43] PROTOCOLO ACTUAL — Ejecucion manual
+Fuente: Email SAProCEA (confirmacion recepcion documentacion 05/05/2026) + Google Calendar
+Cambios aplicados:
+  - SAProCEA: estado actualizado a "✅ Documentacion enviada y recibida — 05/05/2026" (Tabla 2 + Tabla 3 docx + HTML)
+  - Parcial Climatologia (14/05): eliminado (ya rendido anteriormente)
+  - Acto de Colacion (20/05, 14:00-21:00): agregado en proximos eventos
+  - Tomografia dental: marcada como REALIZADA (ya fue hecha), eliminada de proximos eventos
+  - Implante dental: estado actualizado segun resultado de tomografia
+  - Sesion log: entrada 05/05/2026 agregada al docx
+  - Header docx actualizado: 05/05/2026
+  - agenda.html regenerado y publicado en GitHub Pages
+Commit: 617a6f5
+URL: https://lord-massi.github.io/agenda-personal/agenda.html
+
+════════════════════════════════════════
+[07/05/2026 01:13] — Protocolo Actual ejecutado
+Acciones aprobadas: 3 de 5 totales
+Cambios realizados:
+  • [1] Limpieza de eventos pasados: ya estaban limpios por ejecución anterior — sin cambios necesarios
+  • [2] SAProCEA actualizado: documentación completa enviada 05/05, cuota anual única sin mensualidades
+  • [3] Climatología actualizado: parcial confirmado para el 19/05/2026
+  • Fecha del documento actualizada a 06/05/2026
+  • agenda.html regenerado con los cambios
+Acciones no aprobadas: [4] Dr. Balasus (no actualizado), [5] Evento calendario Climatología (no creado)
+════════════════════════════════════════
