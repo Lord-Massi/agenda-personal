@@ -75,3 +75,26 @@ Cambios realizados:
   • agenda.html regenerado con los cambios
 Acciones no aprobadas: [4] Dr. Balasus (no actualizado), [5] Evento calendario Climatología (no creado)
 ════════════════════════════════════════
+
+════════════════════════════════════════
+[09/05/2026 — Protocolo Actual ejecutado]
+Acciones aprobadas: 5 de 5 totales
+Cambios realizados:
+  • SAProCEA: estado actualizado a "✅ Matriculado" — certificado recibido el 07/05/2026
+  • Dr. Balasus (Harvard): dataset TROPOMI+GOSAT autorizado — pendiente cerrado
+  • Evento agregado: Striping + Baño Chet (mié 13/05, 17:00–18:00 hs)
+  • Limpieza: eventos Nutricionista 06/05 y Cumpleaños Novios 08/05 eliminados
+  • Limpieza: Nutricionista próxima actualizada a 03/06/2026
+  • Limpieza: filas tesis completadas (29/04–08/05) eliminadas de la tabla
+  • GitHub Pages: pendiente ejecución manual de fix_y_push.bat (lock file en repo)
+════════════════════════════════════════
+
+════════════════════════════════════════
+[13/05/2026 22:58] — Protocolo Actual ejecutado
+Acciones aprobadas: 3 de 3 totales
+Cambios realizados:
+  • [1] Limpieza eventos pasados: eliminadas filas 09/05 (Eloísa) y 11/05 (Reunión Tesis). Nota de preparación reunión 11/05 actualizada en sección 6.3
+  • [2] Postulación laboral registrada: Técnico Medio Ambiente — Victor Contreras, Añelo, Neuquén — CV enviado 13/05/2026
+  • [3] Fecha del documento actualizada a 13/05/2026
+  • agenda.html regenerado con los cambios
+════════════════════════════════════════
